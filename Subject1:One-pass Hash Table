@@ -1,0 +1,10 @@
+class Solution(object):    
+    def twoSum(self, nums, target): 
+        Map={}
+        for item in range(len(nums)):
+            if Map.has_key(target-nums[item]):  
+                return [Map[target-nums[item]],item]
+            else:
+                Map[nums[item]]=item
+                
+        return [0,0]  
