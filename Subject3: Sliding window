@@ -1,0 +1,24 @@
+#采用while循环，设置两个滑块，是效率更高的方式
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        Map={}
+        i=0
+        j=0
+        count=0
+        longcount=0
+        length=len(s)
+        while i<length and j<length:
+            if Map.has_key(s[j]):
+                del Map[s[i]]
+                i=i+1               
+            else:
+                Map[s[j]]=j
+                count=j-i+1
+                j=j+1
+                if count>longcount:
+                    longcount=count
+        return longcount
