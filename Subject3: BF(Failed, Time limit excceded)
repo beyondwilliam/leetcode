@@ -1,0 +1,27 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        Map={}
+        longcount=0
+        count=0
+        if len(s)>0:
+            longcount=1
+            count=1
+            Map[s[0]]=0
+        for i in range(len(s)-count+1):
+            for j in range(i+count,len(s)):        
+                if Map.has_key(s[j]):
+                    if count>longcount:
+                        longcount=count
+                    del Map[s[i]]
+                    count=count-1
+                    break
+                else:
+                    Map[s[j]]=j
+                    count=count+1
+                    if count>longcount:
+                        longcount=count
+        return longcount
