@@ -1,0 +1,30 @@
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        Map={}
+        ans=""
+        if s!="":
+            if len(s)<=numRows or numRows==1:
+                ans=s
+            else:
+                for i in range(len(s)):
+                    remainder=i%((numRows-1)*2)
+                    if remainder<numRows:
+                        if Map.get(remainder)!=None:
+                            Map[remainder]+=s[i]
+                        else:
+                            Map[remainder]=s[i]
+                    else:
+                        if Map.get((numRows*2-remainder-2))!=None:
+                            Map[(numRows*2-remainder-2)]+=s[i]
+                        else:
+                            Map[(numRows*2-remainder-2)]=s[i]                                                                     
+                for j in range(numRows):
+                    ans+=Map[j]
+            return ans
+        else:
+            return ""
