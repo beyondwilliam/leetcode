@@ -1,0 +1,14 @@
+class Solution(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        if nums!=None:
+            for i in range(1,len(nums)):
+                j=i
+                while j>=1 and nums[j]<nums[j-1]:
+                    temp=nums[j]
+                    nums[j]=nums[j-1]
+                    nums[j-1]=temp
+                    j-=1
