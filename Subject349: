@@ -1,0 +1,16 @@
+class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        if nums1==[] or nums2==[]:
+            return []
+        ans=[]
+        count=0
+        while count<len(nums1):
+            if nums1[count] in nums2 and ans.count(nums1[count])<1:
+                ans.append(nums1[count])
+            count+=1
+        return ans
