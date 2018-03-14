@@ -1,0 +1,45 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def sortList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head==None:
+            return None
+        mylist=[]
+        temp=head
+        while temp!=None:
+            mylist.append(temp.val)
+            temp=temp.next
+        self.divert(mylist,0,len(mylist)-1)
+        return mylist
+            
+    def divert(self,mylist,p,r):
+        if p<r:
+            q=(p+r)/2
+            self.divert(mylist,p,q)
+            self.divert(mylist,q+1,r)
+            self.merge(mylist,p,q,r)    
+        
+    def merge(self,mylist,p,q,r):
+        n1=q-p+1
+        n2=r-q
+        l1=mylist[p:q+1]
+        l2=mylist[q+1:r+1]
+        l1.append(2147483647)
+        l2.append(2147483647)
+        i1=0
+        i2=0
+        while i1<n1 or i2<n2:
+            if l1[i1]<=l2[i2]:
+                mylist[p+i1+i2]=l1[i1]
+                i1+=1
+            else:
+                mylist[p+i1+i2]=l2[i2]
+                i2+=1
