@@ -1,0 +1,20 @@
+class Solution:
+    # @param {integer[]} nums
+    # @return {string}
+    def largestNumber(self, nums):
+        ans=""
+        while len(nums):
+            for i in range(0,(len(nums)-1)):
+                if self.compare(nums[i],nums[i+1]):
+                    nums[i],nums[i+1]=nums[i+1],nums[i]
+            ans+=str(nums[-1])
+            nums.pop()
+        return str(int(ans))
+
+    
+    def compare(self,i,j):
+        s1=str(i)+str(j)
+        s2=str(j)+str(i)
+        if int(s1)>int(s2):
+            return True
+        return False
