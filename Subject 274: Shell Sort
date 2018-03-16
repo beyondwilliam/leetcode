@@ -1,0 +1,28 @@
+class Solution(object):
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        #使用希尔排序吧
+        gap=1
+        length=len(citations)
+        if length==0:
+            return 0
+        while gap<length/3:
+            gap=gap*3+1
+        
+        while gap>0:
+            for i in range(gap,length):
+                j=i-gap
+                temp=citations[i]
+                while j>=0 and citations[j]<temp:
+                    citations[j+gap]=citations[j]
+                    j=j-gap
+                citations[j+gap]=temp
+            gap=gap/3
+            
+        for i in range((length-1),-1,-1):
+            if citations[i]>=(i+1):
+                return (i+1)
+        return 0
