@@ -1,0 +1,26 @@
+class Solution(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        N=len(nums)
+        if N==0:
+            return None
+        return self.searchFormMid(nums,0,N-1,target)
+        
+    def searchFormMid(self,mylist,start,end,key):
+        if start+1==end or start==end:
+            if mylist[start]>=key:
+                return start
+            elif mylist[end]>=key:
+                return end
+            else:
+                return end+1
+        if start<end:
+            mid=(start+end)/2
+            if key<=mylist[mid]:
+                return self.searchFormMid(mylist,start,mid,key)
+            else:
+                return self.searchFormMid(mylist,mid+1,end,key)
