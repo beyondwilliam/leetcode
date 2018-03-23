@@ -1,0 +1,28 @@
+# Definition for an interval.
+# class Interval(object):
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
+
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[Interval]
+        :type newInterval: Interval
+        :rtype: List[Interval]
+        """
+        N=len(intervals)
+        ftail=-1
+        nhead=N
+        newone=newInterval
+        for i in range(N):
+            if intervals[i].end<newInterval.start:
+                ftail=i
+            if intervals[i].start>newInterval.end:
+                nhead=i
+                break
+            if intervals[i].start<newInterval.start and intervals[i].end>=newInterval.start:
+                newone.start=intervals[i].start
+            if intervals[i].start<=newInterval.end and intervals[i].end>newInterval.end:
+                newone.end=intervals[i].end
+        return intervals[0:ftail+1]+[newone]+intervals[nhead:N]
