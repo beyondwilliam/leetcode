@@ -1,0 +1,10 @@
+class Solution(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        check=1
+        while nums.count(check)!=0:
+            check+=1
+        return check
