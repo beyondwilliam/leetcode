@@ -1,0 +1,28 @@
+class Solution(object):
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        if matrix!=[]:
+            row=[]
+            column=[]
+            m=len(matrix)
+            n=len(matrix[0])
+            for i in range(m):
+                for j in range(n):
+                    if matrix[i][j]==0:
+                        row.append(i)
+                        column.append(j)
+            rowSet=set(row)
+            columnSet=set(column)
+            
+            while len(rowSet)!=0:
+                r=rowSet.pop()
+                for i in range(n):
+                    matrix[r][i]=0
+                    
+            while len(columnSet)!=0:
+                c=columnSet.pop()
+                for i in range(m):
+                    matrix[i][c]=0
