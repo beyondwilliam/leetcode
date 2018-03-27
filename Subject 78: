@@ -1,0 +1,16 @@
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        ans=[[]]
+        n=len(nums)
+        if n==0:
+            return ans
+        for i in range(n):
+            na=len(ans)
+            for j in range(na):
+                ans.append(ans[j]+[nums[i]])
+        
+        return ans
