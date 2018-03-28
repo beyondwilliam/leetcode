@@ -1,0 +1,47 @@
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        N=len(heights)
+        if N==0:
+            return 0
+        if N==1:
+            return heights[0]
+        ans=0
+        for i in range(N):
+            if (i>0 and i<N-1 and heights[i]>heights[i+1] and heights[i]>=heights[i-1]) or (i==N-1 and heights[i]>=heights[i-1]) or (i==0 and heights[i]>=heights[i+1]):
+                peak=i
+                left=i
+                right=i
+                lowest=heights[i]
+                width=1
+                if ans<lowest*width:
+                    ans=lowest*width
+                while left>0 or right<N-1:
+                    if left==0 and right<N-1:
+                        right+=1
+                        width+=1
+                        if heights[right]<lowest:
+                            lowest=heights[right]
+                    elif right==N-1 and left>0:
+                        left-=1
+                        width+=1
+                        if heights[left]<lowest:
+                            lowest=heights[left]
+                    else:
+                        if heights[left-1]>=heights[right+1]:
+                            left-=1
+                            width+=1
+                            if heights[left]<lowest:
+                                lowest=heights[left]
+                        else:
+                            right+=1
+                            width+=1
+                            if heights[right]<lowest:
+                                lowest=heights[right]
+                    if ans<lowest*width:
+                        ans=lowest*width
+
+        return ans
