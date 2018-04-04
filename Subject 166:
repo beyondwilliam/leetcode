@@ -1,0 +1,29 @@
+class Solution(object):
+    def fractionToDecimal(self, numerator, denominator):
+        """
+        :type numerator: int
+        :type denominator: int
+        :rtype: str
+        """
+        num=abs(numerator)
+        den=abs(denominator)
+        ans,rem=divmod(num,den)
+        sign="-" if numerator*denominator<0 else ""
+        dot="." if rem!=0 else ""
+        numstr=sign+str(ans)+dot
+        if rem==0:
+            return numstr
+        else:
+            index=len(numstr)
+            checkDic={}
+            while rem!=0:
+                checkDic[rem]=index
+                rem*=10
+                numstr+=str(rem/den)
+                rem%=den
+                if rem in checkDic:
+                    numstr=numstr[:checkDic[rem]]+'('+numstr[checkDic[rem]:]
+                    numstr+=')'
+                    break
+                index+=1                          
+            return numstr
