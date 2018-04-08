@@ -1,0 +1,17 @@
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if s=="" and t=="":
+            return True
+        checklist=[0 for i in range(95)]
+        complist=[0 for i in range(95)]
+        for i in range(len(s)):
+            if checklist[ord(s[i])-ord('0')]!=complist[ord(t[i])-ord('0')]:
+                return False
+            checklist[ord(s[i])-ord('0')]=i+1
+            complist[ord(t[i])-ord('0')]=i+1         
+        return True
