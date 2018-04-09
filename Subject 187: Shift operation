@@ -1,0 +1,24 @@
+class Solution(object):
+    def findRepeatedDnaSequences(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        if s=="":
+            return []
+        mystr=set()
+        doublestr=set()
+        mydic={(ord('A')-ord('A')):0,(ord('C')-ord('A')):1,(ord('G')-ord('A')):2,(ord('T')-ord('A')):3}
+        ans=[]
+        for i in range(len(s)-9):
+            v=0
+            for j in range(10):
+                v=v<<2
+                v=v|mydic[ord(s[i+j])-ord('A')]
+            if v not in mystr:
+                mystr.add(v)
+            else:
+                if v not in doublestr:
+                    doublestr.add(v)
+                    ans.append(s[i:i+10])
+        return ans
